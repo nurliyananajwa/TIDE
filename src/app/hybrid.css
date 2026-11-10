@@ -1,0 +1,71 @@
+/*
+  TIDE combined design: ocean atmosphere outside, bento clarity inside.
+  Loaded last, so these rules refine ocean.css, studio.css and reports.css.
+  Palette: deep ocean blues for emphasis, sea-glass greens for reading surfaces.
+*/
+.tide-hybrid {
+  --glass: #d6f1ec;
+  --glass-strong: #b4e3df;
+  --glass-ink: #1b5866;
+  --glass-muted: #4f8790;
+  --deep-ink: #d8f7f1;
+}
+
+/* ── Banner: full size on Overview, compact on every other report ── */
+.ocean-world.tide-hybrid .ocean-chapter.is-compact { min-height: 0; margin-bottom: 22px; }
+.ocean-world.tide-hybrid .ocean-chapter.is-compact .ocean-chapter-copy { padding: 22px 30px 34px; }
+.ocean-world.tide-hybrid .ocean-chapter.is-compact .ocean-chapter-meta { margin-bottom: 10px; }
+.ocean-world.tide-hybrid .ocean-chapter.is-compact h1 { font-size: clamp(26px, 2.6vw, 38px); letter-spacing: -1px; }
+.ocean-world.tide-hybrid .ocean-chapter.is-compact h1 br { display: none; }
+.ocean-world.tide-hybrid .ocean-chapter.is-compact h1 em { margin-left: .25em; }
+.ocean-world.tide-hybrid .ocean-chapter.is-compact p { margin: 8px 0 14px; }
+.ocean-world.tide-hybrid .ocean-chapter.is-compact .ocean-hero-compass { display: none; }
+
+/* ── Overview: the journey map sits above the bento cards ── */
+.ocean-world.tide-hybrid .journey-map { margin-bottom: 22px; }
+
+/* ── Replace the beige/sand cards with sea-glass so every card belongs to the ocean ── */
+.ocean-world.tide-hybrid .conversion-card,
+.ocean-world.tide-hybrid .segment-focus,
+.ocean-world.tide-hybrid .retention-summary .report-card:nth-child(3),
+.ocean-world.tide-hybrid .editorial-finding.finding-2 {
+  background: var(--glass); color: var(--glass-ink);
+}
+.ocean-world.tide-hybrid .stage-card-3 { background: var(--glass-strong); color: var(--glass-ink); }
+.ocean-world.tide-hybrid .conversion-card p,
+.ocean-world.tide-hybrid .conversion-card b,
+.ocean-world.tide-hybrid .segment-focus > p,
+.ocean-world.tide-hybrid .segment-focus > .report-caption { color: var(--glass-muted); }
+.ocean-world.tide-hybrid .conversion-card b { color: var(--glass-ink); }
+.ocean-world.tide-hybrid .retention-summary .report-card:nth-child(3) h3 em,
+.ocean-world.tide-hybrid .editorial-finding.finding-2 h3 em { color: #2a7f88; }
+
+/* ── Readable text: nothing under 11px ── */
+.ocean-world.tide-hybrid .studio-card-label,
+.ocean-world.tide-hybrid .return-card .studio-card-label,
+.ocean-world.tide-hybrid .conversion-card .studio-card-label,
+.ocean-world.tide-hybrid .story-card .studio-card-label,
+.ocean-world.tide-hybrid .report-small-label,
+.ocean-world.tide-hybrid .studio-overline { font-size: 11px; letter-spacing: 1px; }
+.ocean-world.tide-hybrid .flow-axis,
+.ocean-world.tide-hybrid .currents-card > small,
+.ocean-world.tide-hybrid .conversion-card p,
+.ocean-world.tide-hybrid .report-caption { font-size: 11px; }
+.ocean-world.tide-hybrid .report-definition { font-size: 12px; line-height: 1.7; }
+.ocean-world.tide-hybrid .page-footer,
+.ocean-world.tide-hybrid .studio-footnote { font-size: 11px !important; }
+.ocean-world.tide-hybrid .ocean-chapter-meta { font-size: 10px; }
+.ocean-world.tide-hybrid .ocean-chapter-meta > span:last-child { font-size: 10px; opacity: .75; }
+.ocean-world.tide-hybrid .ocean-demo-label { font-size: 10px; }
+
+/* ── Cohort table: ocean heat scale needs a little breathing room ── */
+.ocean-world.tide-hybrid .cohort-matrix td button { font-variant-numeric: tabular-nums; }
+.ocean-world.tide-hybrid .report-toolbar > span,
+.ocean-world.tide-hybrid .matrix-heading > span,
+.ocean-world.tide-hybrid .finding-stat span { font-size: 11px; }
+
+/* ── Callouts: keep the supporting sentence readable on the light glass ── */
+.ocean-world.tide-hybrid .report-callout { background: var(--glass); color: var(--glass-ink); }
+.ocean-world.tide-hybrid .report-callout strong { font-size: 14px; }
+.ocean-world.tide-hybrid .report-callout p { color: var(--glass-muted); font-size: 13px; }
+.ocean-world.tide-hybrid .report-callout button { color: var(--glass-ink); border-color: #4f879066; }

@@ -12,9 +12,9 @@ const chapters: Record<Report,{lead:string;italic:string;line:string;number:stri
 export function OceanAtmosphere(){
   return <div className="ocean-atmosphere" aria-hidden="true"><div className="ocean-backplate"/><div className="ocean-sunlight"/><div className="ocean-grain"/><div className="ocean-bubbles">{Array.from({length:9},(_,i)=><i key={i} style={{left:(6+i*11)+"%",animationDelay:(i*-2.3)+"s",animationDuration:(19+i*2)+"s"}}/>)}</div></div>;
 }
-export function OceanHeader({report,children}:{report:Report;children:ReactNode}){
+export function OceanHeader({report,children,compact=false}:{report:Report;children:ReactNode;compact?:boolean}){
   const chapter=chapters[report];
-  return <header className={`ocean-chapter ocean-chapter-${report.toLowerCase()}`}>
+  return <header className={`ocean-chapter ocean-chapter-${report.toLowerCase()}${compact?" is-compact":""}`}>
     <div className="ocean-chapter-image" aria-hidden="true"/>
     <div className="ocean-chapter-copy"><div className="ocean-chapter-meta"><span>≈ TIDE / {report.toUpperCase()}</span><span>CHAPTER {chapter.number}</span></div><h1>{chapter.lead}<br/><em>{chapter.italic}</em></h1><p>{chapter.line}</p><div className="ocean-header-controls">{children}<span className="ocean-demo-label"><i/> ILLUSTRATIVE DEMO</span></div></div>
     <div className="ocean-hero-compass" aria-hidden="true"><svg viewBox="0 0 140 140"><circle cx="70" cy="70" r="63" fill="none" stroke="currentColor" strokeWidth=".5"/>{Array.from({length:36},(_,i)=><path key={i} d={`M70 ${i%3===0?9:12}V17`} transform={`rotate(${i*10} 70 70)`} stroke="currentColor" strokeWidth=".7"/>)}<path d="M70 30L82 92L70 83L58 92Z" fill="currentColor"/><path d="M70 30V83" stroke="#043e57" strokeWidth="1"/><text x="70" y="29" textAnchor="middle" fill="currentColor" fontSize="8" fontFamily="monospace">N</text></svg><span>FOLLOW YOUR CURRENT</span></div>
