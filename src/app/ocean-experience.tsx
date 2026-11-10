@@ -2,11 +2,11 @@ import type { ReactNode } from "react";
 
 type Report = "Overview" | "Breakdowns" | "Funnels" | "Retention" | "Insights";
 const chapters: Record<Report,{lead:string;italic:string;line:string;number:string}> = {
-  Overview:{lead:"An ocean of",italic:"possibility.",line:"See the currents behind every click.",number:"01"},
-  Breakdowns:{lead:"A thousand shores.",italic:"One audience.",line:"Discover where your visitors make landfall.",number:"02"},
-  Funnels:{lead:"Follow the flow.",italic:"Find the friction.",line:"Trace a journey from first ripple to final destination.",number:"03"},
-  Retention:{lead:"Some tides",italic:"always return.",line:"See who finds their way back to your shores.",number:"04"},
-  Insights:{lead:"Dive a little",italic:"deeper.",line:"The most interesting stories live beneath the surface.",number:"05"},
+  Overview:{lead:"An ocean of",italic:"possibility.",line:"How many people visit, how many buy, and how that is changing.",number:"01"},
+  Breakdowns:{lead:"Breakdowns.",italic:"Who visits, and who buys?",line:"Compare visitors and conversion by device, traffic source and country.",number:"02"},
+  Funnels:{lead:"Funnels.",italic:"Where do buyers drop off?",line:"Follow visitors from viewing a product to completing a purchase.",number:"03"},
+  Retention:{lead:"Retention.",italic:"Who comes back?",line:"Track how many new visitors return in the weeks after their first visit.",number:"04"},
+  Insights:{lead:"Insights.",italic:"What should we act on?",line:"The three findings worth investigating first, with the evidence for each.",number:"05"},
 };
 
 export function OceanAtmosphere(){
