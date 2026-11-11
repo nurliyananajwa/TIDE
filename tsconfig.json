@@ -34,21 +34,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts",
-    ".next-review/types/**/*.ts",
-    ".next-review/dev/types/**/*.ts",
-    ".next-design-preview/types/**/*.ts",
-    ".next-design-preview/dev/types/**/*.ts",
-    ".next-studio-preview/types/**/*.ts",
-    ".next-studio-preview/dev/types/**/*.ts",
-    ".next-studio-v2/types/**/*.ts",
-    ".next-studio-v2/dev/types/**/*.ts",
-    ".next-reports-preview/types/**/*.ts",
-    ".next-reports-preview/dev/types/**/*.ts",
-    ".next-ocean-preview/types/**/*.ts",
-    ".next-ocean-preview/dev/types/**/*.ts",
-    ".next-patch-check/types/**/*.ts",
-    ".next-patch-check/dev/types/**/*.ts"
+    "**/*.mts"
   ],
   "exclude": [
     "node_modules"

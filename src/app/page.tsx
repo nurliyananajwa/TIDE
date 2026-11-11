@@ -24,9 +24,9 @@ export default function Home() {
       <OceanAtmosphere />
       <aside className="sidebar">
         <Link className="brand" href="/" aria-label="TIDE home"><span className="brand-icon">≈</span>TIDE<span className="brand-dot">.</span></Link>
-        <div className="workspace"><span className="workspace-icon">G</span><div><strong>Merchandise Store</strong><small>Demo workspace</small></div><span className="chevron">⌄</span></div>
+        <div className="workspace"><span className="workspace-icon">G</span><div><strong>Merchandise Store</strong><small>Demo workspace</small></div></div>
         <p className="nav-label">REPORTS</p>
-        <nav aria-label="Reports">{tabs.map((item, i) => <button key={item} className={tab === item ? "nav-item active" : "nav-item"} onClick={() => setTab(item)} aria-current={tab === item ? "page" : undefined}><span className="nav-icon" aria-hidden="true">{icons[i]}</span>{item}{item === "Insights" && <span className="nav-count">3</span>}</button>)}</nav>
+        <nav aria-label="Reports">{tabs.map((item, i) => <button key={item} className={tab === item ? "nav-item active" : "nav-item"} onClick={() => setTab(item)} aria-current={tab === item ? "page" : undefined}><span className="nav-icon" aria-hidden="true">{icons[i]}</span>{item}</button>)}</nav>
         <div className="sidebar-bottom"><div className="dataset-note"><span className="status-dot" />Demo dataset<p>Illustrative e-commerce data,<br />1 Nov 2020 – 31 Jan 2021.</p></div><div className="profile"><span className="avatar">N</span><div><strong>Najwa</strong><small>Personal workspace</small></div></div></div>
       </aside>
       <div className="main-shell">

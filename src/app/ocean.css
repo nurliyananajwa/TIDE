@@ -14,12 +14,9 @@
 .ocean-world .workspace strong,.ocean-world .profile strong{color:#caefef}.ocean-world .workspace small,.ocean-world .profile small{color:#8fbdc7}
 .ocean-world .workspace-icon{background:#b9e0d71a!important;color:#c9f5df!important}.ocean-world .nav-label{color:#8ec7d1!important}
 .ocean-world .nav-item{color:#9fcad1!important;background:none}.ocean-world .nav-item:hover{background:#ffffff0b!important}.ocean-world .nav-item.active{color:#063d55!important;background:#b9efea!important;box-shadow:0 3px 15px #001c3820}
-.ocean-world .dataset-note,.ocean-world .dataset-note p{color:#8bbac3!important}.ocean-world .avatar{background:#eeead6!important;color:#52796e!important}.ocean-world .profile{border-color:#9de3df20}.ocean-world .nav-count{border-color:currentColor}
+.ocean-world .dataset-note,.ocean-world .dataset-note p{color:#8bbac3!important}.ocean-world .avatar{background:#eeead6!important;color:#52796e!important}.ocean-world .profile{border-color:#9de3df20}
 .ocean-world .topbar{position:relative;background:#03283bd9!important;backdrop-filter:blur(20px);border-bottom:1px solid #a2ebe21f!important}
 .ocean-world .breadcrumb{color:#81b9c7}.ocean-world .breadcrumb strong{color:#d6f8ee}
-.ocean-world .design-switch{background:#ffffff0b!important;border:1px solid #9cdbd326!important;border-radius:24px!important}
-.ocean-world .design-switch button{color:#a6ccd5!important;border-radius:20px!important}
-.ocean-world .design-switch button[aria-pressed=true]{background:#c6f4eb!important;color:#06576a!important;box-shadow:0 2px 12px #b4ffe822}
 .ocean-world .demo-badge{background:#ffffff0c!important;border-color:#9ce1d73a!important;color:#c3dcd6!important}
 .ocean-world .info-banner{background:#053950eb!important;border-color:#8cddd855!important;color:#c4f0ec!important}
 .ocean-chapter{position:relative;isolation:isolate;min-height:330px;margin:0 0 30px;border-radius:18px;overflow:hidden;background:#05425b;box-shadow:0 16px 50px #00172a38;border:1px solid #c0f5ec35}
@@ -38,18 +35,9 @@
 .ocean-foam{position:absolute;left:-5%;width:110%;height:42px;bottom:-1px;color:#bce7e2;animation:foam-drift 13s ease-in-out infinite alternate}
 @keyframes foam-drift{from{transform:translateX(-2%)}to{transform:translateX(2%)}}
 .ocean-chapter-breakdowns .ocean-chapter-image{background-position:70% 38%}.ocean-chapter-funnels .ocean-chapter-image{background-position:60% 75%}.ocean-chapter-retention .ocean-chapter-image{background-position:80% 42%}.ocean-chapter-insights .ocean-chapter-image{background-position:40% 60%}
-.ocean-world .studio-headline,.ocean-world .atlas-titleline{display:none}
-.ocean-world .report-intro{display:none}
 .ocean-world .page-footer{color:#add8da!important;border-top-color:#aceee529!important;background:#00354d66;border-radius:8px;padding:15px!important;line-height:1.8}
 .ocean-world .page-footer .status-dot{background:#83e8cf}
-.ocean-world .report-atlas{--report-ink:#d1eff0;--report-muted:#97c8d3;--report-line:#44818c;--report-paper:#07516a}
-.ocean-world .report-bento{--report-ink:#1c5869;--report-muted:#5f929c;--report-line:#aacfd2;--report-paper:#e1f3ef}
-.ocean-world .report-definition{color:#b1d7db;background:#00334bc9;padding:14px 18px;border:1px solid #a1d9da20;border-radius:7px;max-width:none}
-.ocean-world .report-toolbar>span{color:#aedcde}
-.ocean-world .report-tabs{background:#02334bbc!important;border:1px solid #a3e6e43a!important}
-.ocean-world .report-tabs button{color:#aed8dd!important}.ocean-world .report-tabs button[aria-pressed=true]{background:#cbf4e9!important;color:#075669!important}
-.ocean-world .report-edition{color:#a5e4df}
-.ocean-world .expedition,.ocean-world .audience-archipelago,.ocean-world .route-map,.ocean-world .notes-map{background-image:linear-gradient(#00314ed9,#003b53c9),var(--sea-photo)!important;background-size:cover!important;background-position:center!important;border-color:#78d5d85c!important}
+.ocean-world .expedition{background-image:linear-gradient(#00314ed9,#003b53c9),var(--sea-photo)!important;background-size:cover!important;background-position:center!important;border-color:#78d5d85c!important}
 .ocean-world .map-terrain{background-image:linear-gradient(#003b5180,#00576e80),var(--sea-photo);background-size:cover;background-position:center}
 .ocean-world .terrain-svg>rect:first-of-type{fill:transparent}
 .ocean-world .terrain-svg path[fill="url(#terrain-land)"]{fill:#e6dcb4;stroke:#f6fff0}
@@ -60,74 +48,11 @@
 .ocean-world .expedition-label{background:#003b50e8;border-color:#97e9da66}.ocean-world .expedition-label strong{color:#e2fff2!important}.ocean-world .expedition-label small{color:#a2ddd7}
 .ocean-world .expedition-marker{background:#0c5b6a;border-color:#8be2de;color:#d8fbf0}
 .ocean-world .expedition-stop.chosen .expedition-marker{background:#d3fbe9;color:#07586b;box-shadow:0 0 0 8px #bcfff322,0 0 35px #7bffdc33}
-.ocean-world .expedition-detail,.ocean-world .report-inspector{background:#e6f6ed!important;color:#1e5e69!important;box-shadow:0 8px 30px #001b3e40}
-.ocean-world .expedition-detail h3,.ocean-world .report-inspector h3{color:#174f60}.ocean-world .expedition-detail p,.ocean-world .report-inspector>p{color:#5d8b8e}
-.ocean-world .expedition-detail>button,.ocean-world .report-inspector>button{color:#266d78;border-color:#b4d8d0}
-.ocean-world .detail-index,.ocean-world .detail-number small,.ocean-world .inspector-number,.ocean-world .report-inspector>span:not(:first-child){color:#699694}
-.ocean-world .map-layerbar,.ocean-world .map-tools button{background:#00354bd9;color:#c1ece9;border-color:#70c1c7}
-.ocean-world .map-layerbar button{color:#b0ddd9}.ocean-world .map-layerbar button[aria-pressed=true]{background:#b0f0dd;color:#165a69}
-.ocean-world .expedition-dock{background:#01435bcf;border-color:#6cb8c95e;backdrop-filter:blur(15px)}
-.ocean-world .expedition-dock>button{border-color:#6cb8c93b;color:#dff9f1}
-.ocean-world .expedition-dock>button>span{color:#96d3da}.ocean-world .expedition-dock small{color:#a4f1d2}
-.ocean-world .map-coordinates,.ocean-world .map-scale,.ocean-world .map-caption,.ocean-world .chart-corner-label{color:#abe3e5}
-.ocean-world .atlas-map-key>button,.ocean-world .atlas-map-key>p{background:#00435be8;color:#cff7eb;border-color:#64aebb}
-.ocean-world .audience-island{color:#d4e7ba}.ocean-world .audience-island.island-1{color:#9cdac8}.ocean-world .audience-island.island-2{color:#e7ce9a}
-.ocean-world .audience-island>span{color:#09586a;text-shadow:0 1px 10px #effff977}
-.ocean-world .audience-island svg{filter:drop-shadow(0 0 15px #9ffff044) drop-shadow(0 7px 5px #002d4b55)}
-.ocean-world .route-stream path:first-child{stroke:#83ebe0;stroke-opacity:.2}
-.ocean-world .route-stream path:nth-child(2){stroke:#c7fff1;filter:drop-shadow(0 0 4px #6cffe1)}
-.ocean-world .route-stream circle{fill:#aef2e0;stroke:#dbfff0}
-.ocean-world .route-waypoint>span{background:#0d5968;color:#dcfff2;border-color:#8ee4da}
-.ocean-world .route-waypoint.current>span{background:#f2e7c8;color:#0c5b6b;box-shadow:0 0 0 8px #98ffe821,0 0 30px #7effe333}
-.ocean-world .route-waypoint strong{color:#e1fff5}.ocean-world .route-waypoint small{color:#b8e5e1}
-.ocean-world .route-detail{background:#02465bbf;border-color:#8be6d34a;color:#def8ee}
-.ocean-world .route-detail>div>span:not(.report-small-label){color:#9fdbd9}
-.ocean-world .report-atlas .report-callout{background:#00485caa;border-color:#92dcd34d;color:#daf6eb;padding:22px;border-radius:8px}
-.ocean-world .report-callout p{color:#8fc8ce}.ocean-world .report-callout button{border-color:#8ed8d05c}
-.ocean-world .retention-atlas{background:#00465bc9;border-color:#8ce4d54d}
-.ocean-world .cohort-selector{background:#004256c9;border-color:#8ee7d22e}
-.ocean-world .cohort-selector button{color:#a5dbdd}.ocean-world .cohort-selector button[aria-pressed=true]{background:#b7eddf;color:#215d67;border-color:#b7eddf}
-.ocean-world .retention-radar{background-image:radial-gradient(ellipse,#83ffdb20,transparent 65%),linear-gradient(#003c58dc,#003b53e8),var(--sea-photo);background-size:cover;background-position:center}
-.ocean-world .retention-radar circle[stroke="#ece8bb"]{stroke:#bafbe8;filter:drop-shadow(0 0 6px #78ffdc80)}
-.ocean-world .retention-radar circle[stroke="#8ebba6"]{stroke:#70b6cc}.ocean-world .retention-radar text:first-of-type{fill:#e3fff5}.ocean-world .retention-radar text:last-of-type{fill:#92d3d5}
-.ocean-world .retention-weeklist{background:#004254aa;border-color:#7bdfd62b}.ocean-world .retention-weeklist button{color:#afe2db;border-color:#7dd8d32b}.ocean-world .retention-weeklist button[aria-pressed=true]{background:#b8f2e1;color:#175e69}
-.ocean-world .field-note-paper{background:#ebf5e9;color:#285d63}.ocean-world .field-note-paper>p{color:#668e8c}
-.ocean-world .note-pin>span{background:#026176;border-color:#9aeee0;color:#cefff0}.ocean-world .note-pin.note-current>span{background:#d9f7df;color:#0b5f6f;box-shadow:0 0 0 8px #97ffdf22,0 0 35px #69f5d544}
-.ocean-world .note-pin>div{background:#00435cd9;border-color:#7bccc455;color:#c6f3e4}
-.ocean-world .audience-card{background:linear-gradient(105deg,#dbf5e9 55%,#cbf0e2b5),var(--sea-photo);background-size:cover;color:#246774}
-.ocean-world .activity-card{background:linear-gradient(#003d5be8,#00627adf),var(--sea-photo);background-size:cover;background-position:center;color:#ccf4ee}
-.ocean-world .activity-card .studio-card-label{color:#a2dfdf}
-.ocean-world .currents-card,.ocean-world .segment-comparison{background:#d3eeea;color:#245d6a;border-color:#b9dcd5}
-.ocean-world .conversion-card,.ocean-world .segment-focus{background:#efddbb;color:#5e6650}
-.ocean-world .return-card{background:linear-gradient(#006e7bc9,#00556ae8),var(--sea-photo);background-size:cover;color:#d2faeb}
-.ocean-world .return-orbit{color:#8bdfd589}.ocean-world .return-growth{color:#9ce5d5}
-.ocean-world .story-card,.ocean-world .segment-question{background:linear-gradient(115deg,#003b53ed,#005370dc),var(--sea-photo);background-size:cover;color:#d6f8e9}
-.ocean-world .story-card h3 em,.ocean-world .segment-question h3 em{color:#8ce3dc}
-.ocean-world .current-streams>div>div,.ocean-world .segment-track{background:#b1d4d0}
-.ocean-world .current-streams i,.ocean-world .segment-track i{background:#3c9ca3}
-.ocean-world .segment-bars>button{color:#357883}.ocean-world .segment-bars>button[aria-pressed=true]{background:#f2fcf5}
-.ocean-world .segment-focus>p,.ocean-world .segment-focus>.report-caption{color:#879574}
-.ocean-world .focus-ring{color:#b9c397}
-.ocean-world .stage-card{background:#d1eee7;color:#2e7380}
-.ocean-world .stage-card-1{background:#b1e0dd;color:#1d7181}.ocean-world .stage-card-2{background:#8ccad1;color:#165a74}.ocean-world .stage-card-3{background:#f1dfb7;color:#5c6a55}
-.ocean-world .stage-volume{background:#effffb55;border-radius:55% 55% 4px 4px}.ocean-world .stage-volume>i{border-radius:50% 50% 4px 4px;background:currentColor;opacity:.4}
-.ocean-world .completion-note{background:#006078;color:#d4f5e7}.ocean-world .selected-stage-note{background:#d8efea;color:#296674}
-.ocean-world .selected-stage-note p{color:#6e9896}.ocean-world .retention-summary .report-card{background:#caeee4;color:#296877}
-.ocean-world .retention-summary .report-card:nth-child(2){background:linear-gradient(#00516bdb,#00445add),var(--sea-photo);background-size:cover;color:#d3f8e8}
-.ocean-world .retention-summary .report-card:nth-child(3){background:#f0e7ce;color:#638579}
-.ocean-world .cohort-matrix{background:#e5f4ed;color:#2b6d75;border-color:#b6dad2}
-.ocean-world .editorial-finding.finding-0{background:linear-gradient(115deg,#003f5be8,#005b72df),var(--sea-photo);background-size:cover;color:#dbf9ec}
-.ocean-world .editorial-finding.finding-1{background:#cbeee4;color:#2d6f74}.ocean-world .editorial-finding.finding-2{background:#f0e3c7;color:#677e67}
-.ocean-world .editorial-finding.finding-0 .evidence-bars>div>div{background:#dcfff120}.ocean-world .editorial-finding.finding-0 .finding-question{border-color:#d4f8ec33}
-.ocean-world .studio-footnote{color:#abd7d9;background:#00385085;padding:13px;border-radius:7px}
-.ocean-world .bento-studio .studio-card,.ocean-world .report-bento .report-card{box-shadow:0 8px 25px #001d3c22;border:1px solid #d4fff640}
 .ocean-world.design-coastal .ocean-backplate{background-image:linear-gradient(90deg,#cceeeac9,#bef0e2a8),var(--sea-photo)}
 .ocean-world.design-coastal .main-shell{background:#d9f1ec33}
-.ocean-world.design-coastal .page-footer,.ocean-world.design-coastal .studio-footnote{color:#377e8b!important;background:#e4f7efcf!important;border-color:#80bcc555!important}
-.ocean-world.design-coastal .report-definition{background:#e4f7efd9;color:#5f8d94;border-color:#b7ded4}
-.ocean-world.design-coastal .report-toolbar>span{color:#2e727e}.ocean-world.design-coastal .report-callout{background:#d8f0e6cc;color:#326d76;padding:22px;border-radius:8px;border-color:#8cc9c2}.ocean-world.design-coastal .report-callout p{color:#6a9c9d}
+.ocean-world.design-coastal .page-footer{color:#377e8b!important;background:#e4f7efcf!important;border-color:#80bcc555!important}
 @media(min-width:1500px){.ocean-chapter{min-height:380px}.ocean-chapter-copy{padding:37px 45px 65px}.ocean-hero-compass{width:145px;right:65px;top:80px}}
 @media(max-width:1000px){.ocean-chapter{min-height:325px}.ocean-chapter-copy{padding:26px 28px 58px}.ocean-chapter h1{font-size:49px}.ocean-hero-compass{width:90px;right:22px;top:52px;opacity:.7}.ocean-chapter p{max-width:340px;font-size:11px}.ocean-chapter-meta{font-size:7px;gap:16px}.ocean-demo-label{font-size:5px}.ocean-header-controls{gap:12px}.ocean-header-controls select{font-size:9px!important}}
-@media(max-width:760px){.ocean-chapter{min-height:330px}.ocean-chapter-copy{padding:24px 23px 60px}.ocean-chapter h1{font-size:43px;letter-spacing:-1.9px}.ocean-chapter-image{background-position:65% center}.ocean-hero-compass{display:none}.ocean-chapter-meta{font-size:6px;letter-spacing:1.5px}.ocean-demo-label{display:none}.ocean-chapter p{font-size:11px;max-width:320px}.ocean-world .report-definition{font-size:9px}.ocean-atmosphere .ocean-sunlight{opacity:.6}}
+@media(max-width:760px){.ocean-chapter{min-height:330px}.ocean-chapter-copy{padding:24px 23px 60px}.ocean-chapter h1{font-size:43px;letter-spacing:-1.9px}.ocean-chapter-image{background-position:65% center}.ocean-hero-compass{display:none}.ocean-chapter-meta{font-size:6px;letter-spacing:1.5px}.ocean-demo-label{display:none}.ocean-chapter p{font-size:11px;max-width:320px}.ocean-atmosphere .ocean-sunlight{opacity:.6}}
 @media(max-width:600px){.ocean-world .sidebar{backdrop-filter:none;background:#03283bf2!important}.ocean-world .topbar{backdrop-filter:none}.ocean-world main{padding-top:18px!important}.ocean-chapter{border-radius:11px;margin-bottom:22px;min-height:340px}.ocean-chapter-copy{padding:25px 22px 56px}.ocean-chapter h1{font-size:43px;line-height:1.05;letter-spacing:-1.6px}.ocean-chapter p{font-size:10px;max-width:260px;line-height:1.8;margin:17px 0}.ocean-chapter-meta{gap:15px;margin-bottom:24px;letter-spacing:1px;font-size:6px}.ocean-chapter-meta>span:last-child{font-size:6px;letter-spacing:.8px}.ocean-header-controls .filters select{font-size:9px!important;padding:9px 20px 9px 10px!important}.ocean-chapter-image{background-image:linear-gradient(90deg,#00374fe8,#00576d80 70%,#00698144),var(--sea-photo);background-position:67% center}.ocean-foam{height:30px}.ocean-world .page-footer{font-size:8px!important}}
-@media(prefers-reduced-motion:reduce){.ocean-world *, .ocean-world *:before,.ocean-world *:after{animation:none!important;transition:none!important}}
+@media(prefers-reduced-motion:reduce){.ocean-world *, .ocean-world *:before, .ocean-world *:after{animation:none!important;transition:none!important}}

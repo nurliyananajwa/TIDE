@@ -15,7 +15,6 @@
 
 # next.js
 /.next/
-/.next-prototype/
 /out/
 
 # production
@@ -43,17 +42,6 @@ next-env.d.ts
 
 !.env.example
 
-/.next-review/
-/.next-design-preview/
-/.next-studio-preview/
-/.next-studio-v2/
-/.next-reports-preview/
-/.next-ocean-preview/
-/.next-patch-check/
-
-# All local Next.js preview/build caches
-/.next*/
-/work/
 /*.log
 *.key
 *.p12
