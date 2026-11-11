@@ -1,4 +1,4 @@
-import type { Cohort, FunnelStep, Segment } from "../app/demo-data";
+import type { Cohort, FunnelStep, Segment } from "./view";
 
 // Calculations shared by more than one report. Each is done once here so two
 // pages can never disagree about, say, which funnel step loses the most people.

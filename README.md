@@ -6,22 +6,46 @@ An ocean-inspired product analytics portfolio project. The current milestone is 
 
 ## Current prototype
 
-Five reports each have two distinct presentations: Coastal Bento and Ocean Atlas.
+One design: an ocean look around plain, readable analytics. Every report opens with a one-sentence answer, then one labelled chart, then a detail table.
 
-| Report | Coastal Bento | Ocean Atlas |
+| Report | URL | Question it answers |
 | --- | --- | --- |
-| Overview | Metric cards and a visitor activity chart | Interactive journey terrain map |
-| Breakdowns | Segment comparison and focus cards | Selectable audience islands |
-| Funnels | Selectable funnel step cards | Journey waypoints and a detail panel |
-| Retention | Interactive cohort heatmap | Cohort and week retention rings |
-| Insights | Editorial evidence cards | Selectable field notes |
+| Overview | `/overview` | How many people visit, how many buy, and how is that changing? |
+| Breakdowns | `/breakdowns` | Who visits, and who buys? (by device, traffic source or country) |
+| Funnels | `/funnels` | Where do buyers drop off? |
+| Retention | `/retention` | Who comes back? |
+| Insights | `/insights` | What should we act on? |
 
-The interface includes generated aerial ocean artwork, decorative motion, responsive layouts, filters, and reduced-motion support. All displayed metrics, geographic shapes, and example findings are illustrative. No live visitor tracking is active.
+The device and month filters live in the URL (for example `/funnels?device=mobile&period=2021-01`), so any report view can be linked. Pages render on the server.
+
+All displayed numbers are illustrative but consistent with each other. No live visitor tracking is active.
+
+## Project structure
+
+```
+src/
+  app/
+    layout.tsx            app shell: backdrop, sidebar, footer
+    <report>/page.tsx     one server-rendered page per report
+    shell.css             reset, tokens, sidebar, banner, filters, footer
+    reports.css           report content: cards, charts, tables
+  components/             charts, banner, filter bar, journey map, shared UI
+  lib/
+    view.ts               the data contract: getView(filters) returns everything a report needs
+    demo-view.ts          TEMPORARY illustrative numbers; delete once SQL is in place
+    analysis.ts           calculations shared between reports (funnel losses, rankings, retention curve)
+    filters.ts            reads and writes the URL filters
+    format.ts             number and date formatting
+    reports.ts            the list of reports (name, URL, banner copy)
+    db.ts                 server-only PostgreSQL helper
+```
+
+**Moving to real data:** write SQL that returns the `View` shape and call it from `getView()` in `lib/view.ts`. No page, chart or stylesheet needs to change.
 
 ## Stack
 
 - Next.js 16.4.5, React 19.3, TypeScript
-- CSS and SVG visualizations
+- Plain CSS (no framework) and hand-drawn SVG charts
 - PostgreSQL hosted on Supabase, accessed server-side through pg
 - Planned: Better Auth with Google login, GA4 sample extraction through BigQuery, deployment to Vercel
 
@@ -50,20 +74,20 @@ The database helper uses the public Supabase CA certificate in certs/supabase-ca
 ## Validation
 
 ~~~sh
-npx tsc --noEmit
-npm run build -- --webpack
+npm run typecheck
+npm run lint
+npm run build
 ~~~
-
-The production build and TypeScript checks passed on Next.js 16.4.5 before this repository baseline. Report interactions and all five reports in both themes were checked in the browser; mobile page widths were checked at 390px.
 
 ## Roadmap
 
 - [x] Next.js and TypeScript foundation
-- [x] Five interactive prototype reports in both design modes
+- [x] Five prototype reports
 - [x] Local ocean artwork and responsive styling
 - [x] Server-only PostgreSQL helper and connection-check script
 - [x] Local database connectivity verified during initial setup
-- [ ] Agree the final prototype design
+- [x] Agree the final prototype design
+- [x] Clean up: one page per report, filters in the URL, single data contract
 - [ ] Configure Google login
 - [ ] Extract a user-level GA4 sample in BigQuery
 - [ ] Import/clean events and record data-quality issues
@@ -72,7 +96,7 @@ The production build and TypeScript checks passed on Next.js 16.4.5 before this 
 - [ ] Write findings from the real sample data
 - [ ] Deploy to Vercel
 
-Design review is the current priority. The database may need fresh local credentials; no credentials are included in this repository.
+Getting the real GA4 sample is the next priority. The database may need fresh local credentials; no credentials are included in this repository.
 
 ## Audit trail and collaboration
 
@@ -82,4 +106,4 @@ For future work, make a focused commit for each change, explain its purpose, and
 
 ## Artwork
 
-public/ocean/tide-aerial.png was generated with the built-in image-generation tool for this project. It is stored locally; there is no external image dependency. Cartographic graphics are conceptual visitor-journey illustrations.
+public/ocean/tide-aerial.webp was generated with the built-in image-generation tool for this project. It is stored locally; there is no external image dependency. Cartographic graphics are conceptual visitor-journey illustrations.

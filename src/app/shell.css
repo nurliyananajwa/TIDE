@@ -20,7 +20,7 @@
 }
 
 :root {
-  --sea-photo: url("/ocean/tide-aerial.png");
+  --sea-photo: url("/ocean/tide-aerial.webp");
   --tc-card: #062f45;
   --tc-line: #9fe3dc26;
   --tc-text: #e6f6f3;
@@ -68,7 +68,7 @@ main { max-width: 1500px; margin: auto; padding: 26px 32px; }
 .workspace small, .profile small { display: block; margin-top: 5px; font-size: 11px; color: #8fbdc7; }
 .workspace-icon { display: grid; place-items: center; width: 30px; height: 32px; border-radius: 6px; background: #b9e0d71a; color: #c9f5df; font-weight: bold; }
 .nav-label { margin: 34px 12px 14px; font-size: 8px; letter-spacing: 1.4px; color: #8ec7d1; }
-.nav-item { display: flex; align-items: center; gap: 12px; width: 100%; margin-bottom: 5px; padding: 13px; border-radius: 7px; color: #9fcad1; font-size: 13px; text-align: left; }
+.nav-item { transition: background .15s, color .15s; display: flex; align-items: center; gap: 12px; width: 100%; margin-bottom: 5px; padding: 13px; border-radius: 7px; color: #9fcad1; font-size: 13px; text-align: left; }
 .nav-item:hover { background: #ffffff0b; }
 .nav-item.active { background: #b9efea; color: #063d55; font-weight: 600; box-shadow: 0 3px 15px #001c3820; }
 .nav-icon { width: 21px; font-size: 19px; text-align: center; }
