@@ -120,7 +120,14 @@ function JourneyMap({ view, onNavigate }: { view: View; onNavigate: Nav }) {
           </svg>
           {stops.map((d, i) => <button key={d.name} className={`expedition-stop ${active === i ? "chosen" : ""}`} style={{ left: d.x + "%", top: d.y + "%" }} onClick={() => setActive(i)} aria-pressed={active === i} aria-label={`${d.name}: ${fmt(d.value)} ${d.unit}`}><span className="expedition-marker"><i />{String(i + 1).padStart(2, "0")}</span><span className="expedition-label"><strong>{d.name}</strong><small>{fmt(d.value)} {d.unit}</small></span></button>)}
         </div>
-        <div className="expedition-detail" aria-live="polite"><div className="detail-index">0{active + 1}<span>{s.unit}</span></div><h3>{s.name}</h3><div className="detail-number">{fmt(s.value)}<small>{s.unit}</small></div><p>{s.copy}</p><button onClick={() => onNavigate(s.report)}>Open {s.report.toLowerCase()} <span>↗</span></button></div>
+      </div>
+      <div className="tc-journey-detail" aria-live="polite">
+        <div>
+          <h3>{s.name}</h3>
+          <p>{fmt(s.value)} {s.unit}</p>
+        </div>
+        <p>{s.copy}</p>
+        <button onClick={() => onNavigate(s.report)}>Open {s.report.toLowerCase()} <span aria-hidden="true">↗</span></button>
       </div>
     </section>
   );

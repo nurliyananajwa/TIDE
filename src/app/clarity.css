@@ -146,6 +146,22 @@
 /* ── Journey map (decorative navigation) ── */
 .tc-journey { background: #062f45eb; border: 1px solid var(--tc-line); border-radius: 14px; padding: 18px 20px 20px; color: var(--tc-text); }
 .ocean-world.tide-clear .tc-journey .expedition { margin: 0; min-height: 420px; height: 420px; border-radius: 10px; }
+.tc-journey .map-terrain { bottom: 0; }
+.tc-journey-detail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+  margin-top: 12px;
+  padding: 16px 20px;
+  border-radius: 10px;
+  background: #e6f6ed;
+  color: #174f60;
+}
+.tc-journey-detail h3 { margin: 0 0 4px; font: 24px Georgia, serif; }
+.tc-journey-detail p { margin: 0; font-size: 14px; line-height: 1.5; }
+.tc-journey-detail > p { flex: 1 1 200px; }
+.tc-journey-detail button { padding: 8px 0; border: 0; background: none; color: #155c68; font-weight: 600; cursor: pointer; }
 
 /* ── Footer ── */
 .ocean-world.tide-clear .page-footer { font-size: 12px !important; color: var(--tc-muted) !important; background: #00334bcc !important; border-color: var(--tc-line) !important; }
