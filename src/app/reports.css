@@ -1,41 +1,7 @@
 /*
-  TIDE clarity layer: ocean atmosphere outside, readable analytics inside.
-  Each report = answer sentence → one labelled chart → detail table.
-  Loaded after studio.css and ocean.css.
+  Report content: every report is an answer sentence, one labelled chart, then a detail table.
+  Colours and fonts come from the tokens in shell.css.
 */
-.tide-clear {
-  --tc-card: #062f45;
-  --tc-card-soft: #0a3a52;
-  --tc-line: #9fe3dc26;
-  --tc-text: #e6f6f3;
-  --tc-muted: #9ec4c9;
-  --tc-accent: #7fe0d4;
-  --tc-accent-strong: #3fb9b0;
-  --tc-sand: #f3cf94;
-  --tc-up: #8ee6b4;
-  --tc-down: #f6a08f;
-  --tc-sans: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
-}
-.tide-clear main { font-family: var(--tc-sans); }
-
-/* ── Banner: full on Overview (shorter than before), compact elsewhere ── */
-.ocean-world.tide-clear .ocean-chapter { min-height: 0; margin-bottom: 20px; }
-.ocean-world.tide-clear .ocean-chapter-copy { padding: 26px 32px 40px; }
-.ocean-world.tide-clear .ocean-chapter h1 { font-size: clamp(34px, 3.8vw, 54px); }
-.ocean-world.tide-clear .ocean-chapter-meta { font-size: 11px; margin-bottom: 12px; }
-.ocean-world.tide-clear .ocean-chapter-meta > span:last-child { font-size: 11px; }
-.ocean-world.tide-clear .ocean-chapter p { font-size: 14px; margin: 10px 0 16px; }
-.ocean-world.tide-clear .ocean-chapter.is-compact .ocean-chapter-copy { padding: 20px 28px 30px; }
-.ocean-world.tide-clear .ocean-chapter.is-compact h1 { font-size: clamp(24px, 2.4vw, 34px); letter-spacing: -.6px; }
-.ocean-world.tide-clear .ocean-chapter.is-compact h1 br { display: none; }
-.ocean-world.tide-clear .ocean-chapter.is-compact h1 em { margin-left: .3em; }
-.ocean-world.tide-clear .ocean-chapter.is-compact .ocean-hero-compass { display: none; }
-.ocean-world.tide-clear .ocean-demo-label { font-size: 11px; }
-.tide-clear .filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; }
-.tide-clear .filters label { display: grid; gap: 4px; }
-.tide-clear .tc-filter-label { font-size: 12px; color: #cdeeee; }
-.ocean-world.tide-clear .filters select { font-size: 14px; min-height: 38px; }
-
 /* ── Building blocks ── */
 .tc-report { display: grid; gap: 16px; color: var(--tc-text); }
 .tc-answer { background: linear-gradient(120deg, #0b4660f2, #07384ff2); border: 1px solid var(--tc-line); border-radius: 14px; padding: 18px 22px; }
@@ -108,7 +74,7 @@
 
 /* ── Tables ── */
 .tc-table-scroll { overflow-x: auto; }
-.tc-table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.tc-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; font-variant-numeric: tabular-nums; }
 .tc-table th, .tc-table td { padding: 10px 10px; border-bottom: 1px solid var(--tc-line); text-align: left; white-space: nowrap; font-size: 14px; color: var(--tc-text); }
 .tc-table thead th { font-size: 12px; font-weight: 500; color: var(--tc-muted); }
 .tc-table tbody th { font-weight: 500; color: var(--tc-text); }
@@ -143,10 +109,20 @@
 .tc-insight dd { margin: 0; font-size: 14px; line-height: 1.5; }
 .tc-insight .tc-link { margin-top: auto; justify-self: start; align-self: flex-start; }
 
-/* ── Journey map (decorative navigation) ── */
+/* ── Journey map (Overview only). Decorative navigation: nothing on it is sized by data. ── */
 .tc-journey { background: #062f45eb; border: 1px solid var(--tc-line); border-radius: 14px; padding: 18px 20px 20px; color: var(--tc-text); }
-.ocean-world.tide-clear .tc-journey .expedition { margin: 0; min-height: 420px; height: 420px; border-radius: 10px; }
-.tc-journey .map-terrain { bottom: 0; }
+.expedition { position: relative; height: 420px; border: 1px solid #78d5d85c; border-radius: 10px; overflow: hidden; isolation: isolate; background-color: #132e39; background-image: linear-gradient(#00314ed9, #003b53c9), var(--sea-photo); background-size: cover; background-position: center; }
+.map-terrain { position: absolute; inset: 0; background-image: linear-gradient(#003b5180, #00576e80), var(--sea-photo); background-size: cover; background-position: center; }
+.terrain-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.journey-route { filter: drop-shadow(0 0 3px #77ffe9); }
+.expedition-stop { position: absolute; transform: translate(-50%, -50%); z-index: 1; display: flex; align-items: center; gap: 10px; padding: 10px; border: 0; background: none; color: #d8e1c5; text-align: left; white-space: nowrap; }
+.expedition-marker { position: relative; flex-shrink: 0; display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid #8be2de; border-radius: 50%; background: #0c5b6a; color: #d8fbf0; font-family: monospace; font-size: 9px; box-shadow: 0 0 0 5px #adcd8b10; }
+.expedition-marker i { position: absolute; inset: -12px; border: 1px solid #c9d8a240; border-radius: 50%; opacity: 0; transition: opacity .2s; }
+.expedition-stop.chosen .expedition-marker { background: #d3fbe9; color: #07586b; box-shadow: 0 0 0 8px #bcfff322, 0 0 35px #7bffdc33; }
+.expedition-stop.chosen .expedition-marker i, .expedition-stop:hover .expedition-marker i { opacity: 1; }
+.expedition-label { padding: 9px 12px; border: 1px solid #97e9da66; border-radius: 4px; background: #003b50e8; box-shadow: 0 3px 15px #041d2122; }
+.expedition-label strong { display: block; font-size: 11px; font-weight: 500; color: #e2fff2; }
+.expedition-label small { display: block; margin-top: 5px; font-family: monospace; font-size: 8px; color: #a2ddd7; }
 .tc-journey-detail {
   display: flex;
   flex-wrap: wrap;
@@ -163,9 +139,6 @@
 .tc-journey-detail > p { flex: 1 1 200px; }
 .tc-journey-detail button { padding: 8px 0; border: 0; background: none; color: #155c68; font-weight: 600; cursor: pointer; }
 
-/* ── Footer ── */
-.ocean-world.tide-clear .page-footer { font-size: 12px !important; color: var(--tc-muted) !important; background: #00334bcc !important; border-color: var(--tc-line) !important; }
-
 /* ── Responsive ── */
 @media (max-width: 1100px) {
   .tc-grid-main, .tc-grid-split { grid-template-columns: minmax(0, 1fr); }
@@ -181,6 +154,26 @@
   .tc-funnel-loss { padding-left: 0; }
   .tc-funnel.is-compact .tc-funnel-step { grid-template-columns: 1fr auto; }
   .tc-funnel.is-compact .tc-funnel-loss { padding-left: 0; }
-  .ocean-world.tide-clear .tc-journey .expedition { height: 520px; }
-  .ocean-world.tide-clear .ocean-chapter-copy { padding: 22px 20px 32px; }
+}
+
+/* Journey map: labels shrink, then drop below their markers on narrow screens */
+@media (max-width: 1200px) {
+  .expedition-stop { gap: 5px; }
+  .expedition-label { padding: 8px; }
+  .expedition-label strong { font-size: 10px; }
+  .expedition-marker { width: 29px; height: 29px; }
+}
+@media (max-width: 1000px) {
+  .expedition-stop { width: 52px; height: 52px; justify-content: center; }
+  .expedition-label { position: absolute; top: 40px; left: 50%; transform: translateX(-50%); }
+}
+@media (max-width: 760px) {
+  .expedition { height: 520px; }
+  .expedition-marker { width: 27px; height: 27px; }
+  .expedition-label { top: 39px; }
+  .expedition-label strong { font-size: 9px; }
+  .expedition-label small { font-size: 7px; }
+}
+@media (max-width: 600px) {
+  .expedition-label small { max-width: 90px; white-space: normal; }
 }

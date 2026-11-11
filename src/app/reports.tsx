@@ -2,9 +2,10 @@
 
 import { useState, type ReactNode } from "react";
 import { BarList, CohortTable, Evidence, Funnel, LineChart, RetentionCurve } from "./charts";
-import { dimensions, fmt, longDate, pct, retentionCurve, type Dimension, type View } from "./demo-data";
+import { analyseFunnel, rankByConversion, retentionCurve } from "@/lib/analysis";
+import type { Report } from "@/lib/reports";
+import { dimensions, fmt, longDate, pct, type Dimension, type View } from "./demo-data";
 
-export type Report = "Overview" | "Breakdowns" | "Funnels" | "Retention" | "Insights";
 type Nav = (report: Report) => void;
 
 // ── Shared pieces ──────────────────────────────────────────────
@@ -48,7 +49,7 @@ export function Overview({ view, onNavigate }: { view: View; onNavigate: Nav }) 
   ];
   return (
     <div className="tc-report">
-      <Answer note={p ? null : view.period.includes("–") ? "Choose a single month to compare it with the month before." : "November 2020 is the first month in the dataset, so there is no earlier month to compare with."}>
+      <Answer note={p ? null : "November 2020 is the first month in the dataset, so there is no earlier month to compare with."}>
         In {view.period}, <strong>{fmt(t.visitors)} people</strong> visited{view.device === "All devices" ? "" : ` on ${view.device.toLowerCase()}`} and <strong>{pct(t.rate)}</strong> bought something
         {p && <>, {t.visitors >= p.visitors ? "up" : "down"} <strong>{Math.abs((t.visitors - p.visitors) / p.visitors * 100).toFixed(0)}%</strong> in visitors from {view.previousLabel}</>}.
       </Answer>
@@ -74,7 +75,7 @@ export function Overview({ view, onNavigate }: { view: View; onNavigate: Nav }) 
             <BarList rows={view.segments["Traffic source"]} />
           </Card>
           <Card title="Purchase funnel" subtitle="People reaching each step" action={<LinkButton to="Funnels" onNavigate={onNavigate}>Details</LinkButton>}>
-            <Funnel steps={view.funnel} compact />
+            <Funnel rows={analyseFunnel(view.funnel)} compact />
           </Card>
         </div>
       </div>
@@ -102,21 +103,19 @@ function JourneyMap({ view, onNavigate }: { view: View; onNavigate: Nav }) {
   return (
     <section className="tc-journey" aria-label="Explore by journey stage">
       <header className="tc-card-head"><div><h3>Explore by journey stage</h3><p>Choose a stop to open the report for that stage. The map is decorative; it doesn&apos;t encode data.</p></div></header>
-      <div className="expedition journey-map">
+      <div className="expedition">
         <div className="map-terrain">
           <svg viewBox="0 0 1000 650" preserveAspectRatio="none" className="terrain-svg" aria-hidden="true"><defs>
             <pattern id="atlas-grid-v2" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0H0V50" fill="none" stroke="#7da99f" strokeOpacity=".12" /></pattern>
             <pattern id="atlas-dots" width="13" height="13" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r=".8" fill="#a5c6ab" fillOpacity=".14" /></pattern>
-            <radialGradient id="atlas-water"><stop stopColor="#214c51" /><stop offset="1" stopColor="#102c37" /></radialGradient>
-            <linearGradient id="terrain-land" x2="1" y2="1"><stop stopColor="#617568" /><stop offset=".55" stopColor="#364e46" /><stop offset="1" stopColor="#263e39" /></linearGradient>
             <filter id="coast-shadow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="2" dy="9" stdDeviation="12" floodColor="#020e16" floodOpacity=".6" /></filter>
-          </defs><rect width="1000" height="650" fill="url(#atlas-water)" /><rect width="1000" height="650" fill="url(#atlas-grid-v2)" />
+          </defs><rect width="1000" height="650" fill="url(#atlas-grid-v2)" />
             {[islandA, islandB, islandC].map((d, i) => <g key={i}>
-              {[40, 30, 20, 10].map((w) => <path key={w} d={d} fill="none" stroke="#98cbb4" strokeWidth={w} strokeOpacity=".035" />)}
-              <path d={d} fill="url(#terrain-land)" stroke="#98b499" strokeWidth="1.2" filter="url(#coast-shadow)" />
-              <path d={d} fill="url(#atlas-dots)" />
+              {[40, 30, 20, 10].map((w) => <path key={w} d={d} fill="none" stroke="#f5ffe9" strokeWidth={w} strokeOpacity=".32" />)}
+              <path d={d} fill="#e6dcb4" stroke="#f6fff0" strokeWidth="1.2" filter="url(#coast-shadow)" />
+              <path d={d} fill="url(#atlas-dots)" opacity=".3" />
             </g>)}
-            <path className="journey-route" d="M270 201C340 200 331 312 490 312S600 240 740 240S740 480 600 500" fill="none" stroke="#d5e49a" strokeWidth="2" strokeDasharray="4 7" />
+            <path className="journey-route" d="M270 201C340 200 331 312 490 312S600 240 740 240S740 480 600 500" fill="none" stroke="#b9ffef" strokeWidth="2" strokeDasharray="4 7" />
           </svg>
           {stops.map((d, i) => <button key={d.name} className={`expedition-stop ${active === i ? "chosen" : ""}`} style={{ left: d.x + "%", top: d.y + "%" }} onClick={() => setActive(i)} aria-pressed={active === i} aria-label={`${d.name}: ${fmt(d.value)} ${d.unit}`}><span className="expedition-marker"><i />{String(i + 1).padStart(2, "0")}</span><span className="expedition-label"><strong>{d.name}</strong><small>{fmt(d.value)} {d.unit}</small></span></button>)}
         </div>
@@ -139,8 +138,7 @@ export function Breakdowns({ view }: { view: View }) {
   const [dimension, setDimension] = useState<Dimension>("Traffic source");
   const rows = view.segments[dimension];
   const avg = view.totals.rate;
-  const byRate = [...rows].sort((a, b) => b.rate - a.rate);
-  const best = byRate[0], worst = byRate[byRate.length - 1];
+  const { best, worst, ratio } = rankByConversion(rows);
   const single = rows.length === 1;
   return (
     <div className="tc-report">
@@ -150,7 +148,7 @@ export function Breakdowns({ view }: { view: View }) {
       <Answer note={single ? "Choose All devices in the filter above to compare devices." : `Average conversion for ${scope(view)}: ${pct(avg)}.`}>
         {single
           ? <>Showing <strong>{best.name}</strong> only: {fmt(best.visitors)} visitors, <strong>{pct(best.rate)}</strong> bought something.</>
-          : <><strong>{best.name}</strong> visitors convert best (<strong>{pct(best.rate)}</strong>), <strong>{(best.rate / worst.rate).toFixed(1)}×</strong> the rate of <strong>{worst.name}</strong> ({pct(worst.rate)}).</>}
+          : <><strong>{best.name}</strong> visitors convert best (<strong>{pct(best.rate)}</strong>), <strong>{ratio.toFixed(1)}×</strong> the rate of <strong>{worst.name}</strong> ({pct(worst.rate)}).</>}
       </Answer>
       <div className="tc-grid tc-grid-split">
         <Card title={`Visitors by ${dimension.toLowerCase()}`} subtitle={`Share of ${fmt(view.totals.visitors)} visitors · ${scope(view)}`}>
@@ -179,7 +177,7 @@ export function Breakdowns({ view }: { view: View }) {
           </div>
         </Card>
       </div>
-      <p className="tc-definition">Conversion = visitors who made at least one purchase ÷ visitors in that segment. All values are illustrative demo data.</p>
+      <p className="tc-definition">Conversion = visitors who made at least one purchase ÷ visitors in that segment.</p>
     </div>
   );
 }
@@ -187,30 +185,29 @@ export function Breakdowns({ view }: { view: View }) {
 // ── Funnels ────────────────────────────────────────────────────
 
 export function Funnels({ view }: { view: View }) {
-  const f = view.funnel;
-  const losses = f.slice(1).map((s, i) => ({ from: f[i].name, to: s.name, lost: f[i].people - s.people, rate: s.people / f[i].people }));
-  const biggest = losses.reduce((b, l) => (l.lost > b.lost ? l : b));
-  const checkout = losses[losses.length - 1];
+  const f = analyseFunnel(view.funnel);
+  const biggest = f.find((r) => r.isBiggestLoss)!;
+  const last = f[f.length - 1];
   return (
     <div className="tc-report">
       <Answer note={`${scope(view)} · ${fmt(f[0].people)} people viewed a product; ${fmt(f[3].people)} purchased (${pct(f[3].people / f[0].people)}).`}>
-        <strong>{fmt(biggest.lost)} people</strong> leave between &ldquo;{biggest.from.toLowerCase()}&rdquo; and &ldquo;{biggest.to.toLowerCase()}&rdquo;, more than at any other step. Checkout is also weak: only <strong>{pct(checkout.rate, 0)}</strong> of people who begin checkout finish.
+        <strong>{fmt(biggest.lost!)} people</strong> leave between &ldquo;{biggest.from!.toLowerCase()}&rdquo; and &ldquo;{biggest.name.toLowerCase()}&rdquo;, more than at any other step. Checkout is also weak: only <strong>{pct(last.continueRate!, 0)}</strong> of people who begin checkout finish.
       </Answer>
       <div className="tc-grid tc-grid-split">
         <Card title="Purchase funnel" subtitle="Bar length = people at each step, relative to step 1">
-          <Funnel steps={f} />
+          <Funnel rows={f} />
         </Card>
         <Card title="Step by step" subtitle="Where to look first: high losses and low completion">
           <div className="tc-table-scroll">
             <table className="tc-table">
               <thead><tr><th scope="col">Step</th><th scope="col" className="num">People</th><th scope="col" className="num">Continue</th><th scope="col" className="num">Left</th></tr></thead>
               <tbody>
-                {f.map((s, i) => (
-                  <tr key={s.name}>
-                    <th scope="row">{i + 1}. {s.name}</th>
-                    <td className="num">{fmt(s.people)}</td>
-                    <td className={`num ${i > 0 && losses[i - 1] === checkout ? "is-down" : ""}`}>{i === 0 ? "–" : pct(losses[i - 1].rate, 0)}</td>
-                    <td className={`num ${i > 0 && losses[i - 1] === biggest ? "is-down" : ""}`}>{i === 0 ? "–" : fmt(losses[i - 1].lost)}</td>
+                {f.map((r, i) => (
+                  <tr key={r.name}>
+                    <th scope="row">{i + 1}. {r.name}</th>
+                    <td className="num">{fmt(r.people)}</td>
+                    <td className={`num ${r.isWeakest ? "is-down" : ""}`}>{r.continueRate === null ? "–" : pct(r.continueRate, 0)}</td>
+                    <td className={`num ${r.isBiggestLoss ? "is-down" : ""}`}>{r.lost === null ? "–" : fmt(r.lost)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -252,17 +249,15 @@ export function Retention({ view }: { view: View }) {
 // ── Insights ───────────────────────────────────────────────────
 
 export function Insights({ view, onNavigate }: { view: View; onNavigate: Nav }) {
-  const sources = [...view.segments["Traffic source"]].sort((a, b) => b.rate - a.rate);
-  const best = sources[0], worst = sources[sources.length - 1];
-  const f = view.funnel;
+  const { byRate: sources, best, worst, ratio } = rankByConversion(view.segments["Traffic source"]);
   const short = ["View", "Cart", "Checkout", "Purchase"];
-  const stepRates = f.slice(1).map((s, i) => ({ label: `${short[i]} → ${short[i + 1].toLowerCase()}`, value: s.people / f[i].people * 100 }));
+  const stepRates = analyseFunnel(view.funnel).slice(1).map((r, i) => ({ label: `${short[i]} → ${short[i + 1].toLowerCase()}`, value: r.continueRate! * 100 }));
   const checkoutDone = stepRates[stepRates.length - 1].value;
   const curve = retentionCurve(view.cohorts).filter((r) => r.week > 0);
   const findings: { tag: string; title: ReactNode; evidence: ReactNode; why: string; next: string; report: Report }[] = [
     {
       tag: "Acquisition",
-      title: <><strong>{best.name}</strong> visitors buy <strong>{(best.rate / worst.rate).toFixed(1)}×</strong> as often as <strong>{worst.name}</strong> visitors.</>,
+      title: <><strong>{best.name}</strong> visitors buy <strong>{ratio.toFixed(1)}×</strong> as often as <strong>{worst.name}</strong> visitors.</>,
       evidence: <Evidence items={sources.map((s) => ({ label: s.name, value: s.rate * 100 }))} format={(v) => `${v.toFixed(1)}%`} />,
       why: `${worst.name} brings ${pct(worst.share, 0)} of visitors but converts at ${pct(worst.rate)}.`,
       next: `Which referring sites send ${worst.name.toLowerCase()} traffic, and do those visitors view products at all?`,
@@ -287,7 +282,7 @@ export function Insights({ view, onNavigate }: { view: View; onNavigate: Nav }) 
   ];
   return (
     <div className="tc-report">
-      <Answer note={`Based on ${scope(view)}. These are sample stories from illustrative values, not GA4 findings.`}>
+      <Answer note={`Based on ${scope(view)}.`}>
         Three things stand out: one traffic source converts far worse than the rest, most checkouts are abandoned, and most new visitors don&apos;t come back after week one.
       </Answer>
       <div className="tc-insights">

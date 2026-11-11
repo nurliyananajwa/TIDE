@@ -11,7 +11,7 @@ export const devices = ["All devices", "Desktop", "Mobile", "Tablet"] as const;
 export type Device = typeof devices[number];
 
 // The GA4 sample covers 1 Nov 2020 – 31 Jan 2021, so periods are fixed months, not "last N days".
-export const periods = ["Nov 2020", "Dec 2020", "Jan 2021", "Nov 2020 – Jan 2021"] as const;
+export const periods = ["Nov 2020", "Dec 2020", "Jan 2021"] as const;
 export type Period = typeof periods[number];
 
 type PeriodInfo = { start: string; days: number; visitors: number; conversion: number; previous: Period | null };
@@ -20,8 +20,6 @@ const periodInfo: Record<Period, PeriodInfo> = {
   "Nov 2020": { start: "2020-11-01", days: 30, visitors: 1, conversion: 1, previous: null },
   "Dec 2020": { start: "2020-12-01", days: 31, visitors: 1.15, conversion: 1.095, previous: "Nov 2020" },
   "Jan 2021": { start: "2021-01-01", days: 31, visitors: 0.8, conversion: 0.857, previous: "Dec 2020" },
-  // Unique visitors over 3 months is less than the sum of the months: people return.
-  "Nov 2020 – Jan 2021": { start: "2020-11-01", days: 92, visitors: 2.6, conversion: 0.988, previous: null },
 };
 
 type BaseSegment = { name: string; visitors: number; rate: number; returning?: number };
@@ -144,16 +142,6 @@ function cohortsFor(device: Device): Cohort[] {
     size: Math.round(cohortSizes[i] * ds.share),
     weeks: cohortRates[i].map((v, w) => (w === 0 ? 100 : Math.max(1, v + shift))),
   }));
-}
-
-/** Average retention for each week, weighted by cohort size, using only cohorts that reached that week. */
-export function retentionCurve(cohorts: Cohort[]) {
-  return Array.from({ length: 7 }, (_, w) => {
-    const seen = cohorts.filter((c) => c.weeks[w] !== undefined);
-    const people = seen.reduce((n, c) => n + c.size, 0);
-    const kept = seen.reduce((n, c) => n + c.size * c.weeks[w] / 100, 0);
-    return { week: w, rate: people ? kept / people * 100 : 0, cohorts: seen.length };
-  });
 }
 
 export type View = {

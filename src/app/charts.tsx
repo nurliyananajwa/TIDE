@@ -1,4 +1,5 @@
-import { fmt, pct, shortDate, type Cohort, type DayPoint, type FunnelStep, type Segment } from "./demo-data";
+import type { FunnelRow } from "@/lib/analysis";
+import { fmt, pct, shortDate, type Cohort, type DayPoint, type Segment } from "./demo-data";
 
 // All charts draw from the numbers they are given: every length, height and position is to scale.
 
@@ -72,26 +73,22 @@ export function BarList({ rows, valueLabel = "visitors" }: { rows: Segment[]; va
 }
 
 /** Funnel: bar width = people at that step (relative to the first step), with the loss between steps. */
-export function Funnel({ steps, compact = false }: { steps: FunnelStep[]; compact?: boolean }) {
-  const first = steps[0].people;
-  const losses = steps.slice(1).map((s, i) => ({ lost: steps[i].people - s.people, rate: s.people / steps[i].people }));
-  const biggestLoss = losses.reduce((b, l, i) => (l.lost > losses[b].lost ? i : b), 0);
-  const weakestStep = losses.reduce((b, l, i) => (l.rate < losses[b].rate ? i : b), 0);
+export function Funnel({ rows, compact = false }: { rows: FunnelRow[]; compact?: boolean }) {
   return (
     <ol className={`tc-funnel ${compact ? "is-compact" : ""}`}>
-      {steps.map((s, i) => (
-        <li key={s.name}>
-          {i > 0 && (
-            <div className={`tc-funnel-loss ${i - 1 === biggestLoss ? "is-biggest" : ""} ${i - 1 === weakestStep ? "is-weakest" : ""}`}>
-              <span>↓ {pct(losses[i - 1].rate, 0)} continue · {fmt(losses[i - 1].lost)} people left</span>
-              {!compact && i - 1 === biggestLoss && <b>Most people lost</b>}
-              {!compact && i - 1 === weakestStep && <b>Lowest step completion</b>}
+      {rows.map((r) => (
+        <li key={r.name}>
+          {r.continueRate !== null && r.lost !== null && (
+            <div className={`tc-funnel-loss ${r.isBiggestLoss ? "is-biggest" : ""} ${r.isWeakest ? "is-weakest" : ""}`}>
+              <span>↓ {pct(r.continueRate, 0)} continue · {fmt(r.lost)} people left</span>
+              {!compact && r.isBiggestLoss && <b>Most people lost</b>}
+              {!compact && r.isWeakest && <b>Lowest step completion</b>}
             </div>
           )}
           <div className="tc-funnel-step">
-            <span className="tc-funnel-name">{s.name}</span>
-            <span className="tc-funnel-track"><i style={{ width: `${(s.people / first) * 100}%` }} /></span>
-            <span className="tc-funnel-value">{fmt(s.people)} <small>{pct(s.people / first, 0)} of step 1</small></span>
+            <span className="tc-funnel-name">{r.name}</span>
+            <span className="tc-funnel-track"><i style={{ width: `${r.shareOfFirst * 100}%` }} /></span>
+            <span className="tc-funnel-value">{fmt(r.people)} <small>{pct(r.shareOfFirst, 0)} of step 1</small></span>
           </div>
         </li>
       ))}
@@ -100,7 +97,7 @@ export function Funnel({ steps, compact = false }: { steps: FunnelStep[]; compac
 }
 
 /** Average retention by week since first visit (weeks 1–6), each point labelled. */
-export function RetentionCurve({ curve }: { curve: { week: number; rate: number; cohorts: number }[] }) {
+export function RetentionCurve({ curve }: { curve: { week: number; rate: number }[] }) {
   const pts = curve.filter((c) => c.week > 0);
   const W = 1080, H = 260, left = 48, right = 40, top = 30, bottom = 38, inset = 40;
   const yMax = 40;

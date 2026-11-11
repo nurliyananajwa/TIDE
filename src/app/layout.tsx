@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "./shell.css";
+import "./reports.css";
 export const metadata: Metadata = {
   title: "TIDE | Digital Engagement Analytics",
   description: "Explore website engagement through transparent SQL analytics.",
