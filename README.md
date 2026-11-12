@@ -2,8 +2,6 @@
 
 **Tracking Insights on Digital Engagement**
 
-An ocean-inspired product analytics portfolio project. The current milestone is an interactive design prototype with illustrative data. The planned analytics implementation uses hand-written PostgreSQL queries.
-
 ## Current prototype
 
 Five reports each have two distinct presentations: Coastal Bento and Ocean Atlas.
