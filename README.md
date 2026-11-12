@@ -71,13 +71,3 @@ The production build and TypeScript checks passed on Next.js 16.4.5 before this 
 - [ ] Deploy to Vercel
 
 Design review is the current priority. The database may need fresh local credentials; no credentials are included in this repository.
-
-## Audit trail and collaboration
-
-This repository starts with an honest snapshot of the existing prototype. Earlier design iterations were developed locally and are documented in docs/AUDIT_TRAIL.md; they are not represented as backdated commits.
-
-For future work, make a focused commit for each change, explain its purpose, and record the checks performed. Use branches and pull requests when reviewing larger changes. Coordinate file ownership between contributors before editing the same files.
-
-## Artwork
-
-public/ocean/tide-aerial.png was generated with the built-in image-generation tool for this project. It is stored locally; there is no external image dependency. Cartographic graphics are conceptual visitor-journey illustrations.
